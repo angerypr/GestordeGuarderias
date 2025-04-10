@@ -7,7 +7,7 @@
         public string? Descripcion { get; set; }
         public required DateTime Fecha { get; set; }
         public required TimeSpan Hora { get; set; }
-        public int GuarderiaId { get; set; }
+        public Guid GuarderiaId { get; set; }
         public required Guarderia Guarderia { get; set; }
         public ICollection<ActividadNino> ActividadesNinos { get; set; } = new List<ActividadNino>();
 

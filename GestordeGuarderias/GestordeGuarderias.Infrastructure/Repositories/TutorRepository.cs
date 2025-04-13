@@ -5,17 +5,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GestordeGuarderias.Infrastructure.Repositories
 {
-    public class GuarderiaRepository : BaseRepository<Guarderia>, IGuarderiaRepository
+    public class TutorRepository : BaseRepository<Tutor>, ITutorRepository
     {
-        public GuarderiaRepository(DbContext context) : base(context)
+        public TutorRepository(DbContext context) : base(context)
         {
-        }
-        public async Task<List<Guarderia>> GetGuarderiasByNameAsync(string nombre)
-        {
-            return await _dbSet
-                .Where(g => g.Nombre.Contains(nombre))
-                .ToListAsync();
         }
 
+        public async Task<List<Tutor>> GetTutorsByNameAsync(string nombre)
+        {
+            return await _dbSet
+                .Where(t => t.Nombre.Contains(nombre) || t.Apellido.Contains(nombre))
+                .ToListAsync();
+        }
     }
 }

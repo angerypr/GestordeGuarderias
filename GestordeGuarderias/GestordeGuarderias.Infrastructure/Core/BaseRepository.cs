@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using GestordeGuarderias.Infrastructure.Interfaces;
+using GestordeGuarderias.Domain.Interfaces;
 
 namespace GestordeGuarderias.Infrastructure.Core
 {

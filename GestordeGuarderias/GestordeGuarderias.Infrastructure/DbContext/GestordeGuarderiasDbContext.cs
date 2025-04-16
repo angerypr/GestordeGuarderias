@@ -19,7 +19,6 @@ namespace GestordeGuarderias.Infrastructure
         public DbSet<Actividad> Actividades { get; set; }
         public DbSet<Asistencia> Asistencias { get; set; }
         public DbSet<Pago> Pagos { get; set; }
-        public DbSet<Mensaje> Mensajes { get; set; }
         public DbSet<ActividadNino> ActividadesNinos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -84,24 +83,6 @@ namespace GestordeGuarderias.Infrastructure
                 .HasOne(p => p.Guarderia)
                 .WithMany(g => g.Pagos)
                 .HasForeignKey(p => p.GuarderiaId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Mensaje>()
-                .HasOne(m => m.Nino)
-                .WithMany(n => n.Mensajes)
-                .HasForeignKey(m => m.NinoId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Mensaje>()
-                .HasOne(m => m.Tutor)
-                .WithMany(t => t.Mensajes)
-                .HasForeignKey(m => m.TutorId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Mensaje>()
-                .HasOne(m => m.Guarderia)
-                .WithMany(g => g.Mensajes)
-                .HasForeignKey(m => m.GuarderiaId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             //Configuraciones para tutor
@@ -187,24 +168,6 @@ namespace GestordeGuarderias.Infrastructure
                 entity.Property(g => g.Telefono)
                     .IsRequired()
                     .HasMaxLength(15);
-            });
-
-            //Configuraciones de mnesaje
-            modelBuilder.Entity<Mensaje>(entity =>
-                {
-                    entity.Property(m => m.Asunto)
-                         .IsRequired()
-                         .HasMaxLength(200);
-
-                    entity.Property(m => m.Contenido)
-                        .IsRequired()
-                        .HasMaxLength(1000);
-
-                    entity.Property(m => m.Fecha)
-                        .IsRequired();
-
-                    entity.Property(m => m.Hora)
-                        .IsRequired();
             });
 
             //Configuraciones pago

@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>8eb7d6fb-7e2b-4bc7-a914-359c96d13129</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GestordeGuarderias.Application\GestordeGuarderias.Application.csproj" />
+    <ProjectReference Include="..\GestordeGuarderias.Domain\GestordeGuarderias.Domain.csproj" />
     <ProjectReference Include="..\GestordeGuarderias.Infrastructure\GestordeGuarderias.Infrastructure.csproj" />
   </ItemGroup>
 

@@ -4,6 +4,7 @@ using GestordeGuarderias.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestordeGuarderias.Infrastructure.Migrations
 {
     [DbContext(typeof(GestordeGuarderiasDbContext))]
-    partial class GestordeGuarderiasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250416010842_RemoveMensajeEntity")]
+    partial class RemoveMensajeEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

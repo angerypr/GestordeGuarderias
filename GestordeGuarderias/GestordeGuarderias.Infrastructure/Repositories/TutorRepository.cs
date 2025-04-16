@@ -1,13 +1,13 @@
 ﻿using GestordeGuarderias.Domain.Entities;
 using GestordeGuarderias.Infrastructure.Core;
-using GestordeGuarderias.Infrastructure.Interfaces;
+using GestordeGuarderias.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace GestordeGuarderias.Infrastructure.Repositories
 {
     public class TutorRepository : BaseRepository<Tutor>, ITutorRepository
     {
-        public TutorRepository(DbContext context) : base(context)
+        public TutorRepository(GestordeGuarderiasDbContext context) : base(context)
         {
         }
 

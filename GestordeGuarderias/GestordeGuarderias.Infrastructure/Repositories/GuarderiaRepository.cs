@@ -1,13 +1,13 @@
 ﻿using GestordeGuarderias.Domain.Entities;
 using GestordeGuarderias.Infrastructure.Core;
-using GestordeGuarderias.Infrastructure.Interfaces;
+using GestordeGuarderias.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace GestordeGuarderias.Infrastructure.Repositories
 {
     public class GuarderiaRepository : BaseRepository<Guarderia>, IGuarderiaRepository
     {
-        public GuarderiaRepository(DbContext context) : base(context)
+        public GuarderiaRepository(GestordeGuarderiasDbContext context) : base(context)
         {
         }
         public async Task<List<Guarderia>> GetGuarderiasByNameAsync(string nombre)

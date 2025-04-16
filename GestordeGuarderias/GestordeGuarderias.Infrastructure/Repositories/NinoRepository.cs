@@ -1,12 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GestordeGuarderias.Domain.Entities;
+using GestordeGuarderias.Infrastructure.Core;
+using GestordeGuarderias.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace GestordeGuarderias.Infrastructure.Repositories
 {
-    class NinoRepository
+    public class NinoRepository : BaseRepository<Nino>, INinoRepository
     {
+        public NinoRepository(GestordeGuarderiasDbContext context) : base(context)
+        {
+        }
+
+        public async Task<List<Nino>> GetNinosByNameAsync(string nombre)
+        {
+            return await _dbSet
+                .Where(n => n.Nombre.Contains(nombre) || n.Apellido.Contains(nombre))
+                .ToListAsync();
+        }
     }
 }

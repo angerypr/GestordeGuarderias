@@ -9,7 +9,6 @@
         public required string Cedula { get; set; }
         public required string CorreoElectronico { get; set; }
         public required ICollection<Nino> Ninos { get; set; } = new List<Nino>();
-        public ICollection<Mensaje> Mensajes { get; set; } = new List<Mensaje>();
         public ICollection<Pago> Pagos { get; set; } = new List<Pago>();
     }
 }

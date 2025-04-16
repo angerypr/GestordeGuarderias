@@ -1,12 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GestordeGuarderias.Domain.Entities;
+using GestordeGuarderias.Infrastructure.Core;
+using GestordeGuarderias.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace GestordeGuarderias.Infrastructure.Repositories
 {
-    class ActividadRepository
+    public class ActividadRepository : BaseRepository<Actividad>, IActividadRepository
     {
+        public ActividadRepository(GestordeGuarderiasDbContext context) : base(context)
+        {
+        }
+
+        public async Task<List<Actividad>> GetActividadesByNombreAsync(string nombre)
+        {
+            return await _dbSet
+                .Where(a => a.Nombre.Contains(nombre))
+                .ToListAsync();
+        }
+
     }
 }

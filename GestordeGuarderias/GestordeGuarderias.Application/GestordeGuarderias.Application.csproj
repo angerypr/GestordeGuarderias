@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GestordeGuarderias.Domain\GestordeGuarderias.Domain.csproj" />
+    <ProjectReference Include="..\GestordeGuarderias.Infrastructure\GestordeGuarderias.Infrastructure.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

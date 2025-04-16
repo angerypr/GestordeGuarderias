@@ -10,6 +10,5 @@
         public ICollection<Asistencia> Asistencias { get; set; } = new List<Asistencia>();
         public ICollection<Actividad> Actividades { get; set; } = new List<Actividad>();
         public ICollection<Pago> Pagos { get; set; } = new List<Pago>();
-        public ICollection<Mensaje> Mensajes { get; set; } = new List<Mensaje>();
     }
 }

@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GestordeGuarderias.Domain.Entities;
+using GestordeGuarderias.Infrastructure.Core;
+using GestordeGuarderias.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace GestordeGuarderias.Infrastructure.Repositories
 {
-    class AsistenciaRepository
+    public class AsistenciaRepository : BaseRepository<Asistencia>, IAsistenciaRepository
     {
+        public AsistenciaRepository(GestordeGuarderiasDbContext context) : base(context)
+        {
+        }
     }
 }

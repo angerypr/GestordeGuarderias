@@ -26,20 +26,29 @@ namespace GestordeGuarderias.Application.Services
 
         public async Task<IEnumerable<AsistenciaDTO>> GetAllAsync()
         {
-            var asistencias = await _asistenciaRepository.GetAllAsync();
+            var asistencias = await _asistenciaRepository.GetAllWithRelationsAsync();
+
             return asistencias.Select(a => new AsistenciaDTO
             {
                 Id = a.Id,
                 Fecha = a.Fecha,
                 Presente = a.Presente,
-                NinoId = a.NinoId,
-                GuarderiaId = a.GuarderiaId
+                Nino = new NinoDTO
+                {
+                    Id = a.Nino.Id,
+                    Nombre = a.Nino.Nombre,
+                    Apellido = a.Nino.Apellido
+                },
+                Guarderia = new GuarderiaDTO
+                {
+                    Id = a.Guarderia!.Id,
+                    Nombre = a.Guarderia.Nombre
+                }
             });
         }
-
         public async Task<AsistenciaDTO?> GetByIdAsync(Guid id)
         {
-            var asistencia = await _asistenciaRepository.GetByIdAsync(id);
+            var asistencia = await _asistenciaRepository.GetByIdWithRelationsAsync(id);
             if (asistencia == null) return null;
 
             return new AsistenciaDTO
@@ -47,10 +56,20 @@ namespace GestordeGuarderias.Application.Services
                 Id = asistencia.Id,
                 Fecha = asistencia.Fecha,
                 Presente = asistencia.Presente,
-                NinoId = asistencia.NinoId,
-                GuarderiaId = asistencia.GuarderiaId
+                Nino = new NinoDTO
+                {
+                    Id = asistencia.Nino.Id,
+                    Nombre = asistencia.Nino.Nombre,
+                    Apellido = asistencia.Nino.Apellido
+                },
+                Guarderia = new GuarderiaDTO
+                {
+                    Id = asistencia.Guarderia.Id,
+                    Nombre = asistencia.Guarderia.Nombre
+                }
             };
         }
+
 
         public async Task<AsistenciaDTO> CreateAsync(AsistenciaDTO dto)
         {

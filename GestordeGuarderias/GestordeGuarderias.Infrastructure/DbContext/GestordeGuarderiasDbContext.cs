@@ -19,25 +19,9 @@ namespace GestordeGuarderias.Infrastructure
         public DbSet<Actividad> Actividades { get; set; }
         public DbSet<Asistencia> Asistencias { get; set; }
         public DbSet<Pago> Pagos { get; set; }
-        public DbSet<ActividadNino> ActividadesNinos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ActividadNino>()
-                .HasKey(an => new { an.NinoId, an.ActividadId });
-
-            modelBuilder.Entity<ActividadNino>()
-                .HasOne(an => an.Nino)
-                .WithMany(n => n.ActividadesNinos)
-                .HasForeignKey(an => an.NinoId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<ActividadNino>()
-                .HasOne(an => an.Actividad)
-                .WithMany(a => a.ActividadesNinos)
-                .HasForeignKey(an => an.ActividadId)
-                .OnDelete(DeleteBehavior.Cascade);
-
             modelBuilder.Entity<Nino>()
                 .HasOne(n => n.Guarderia)
                 .WithMany(g => g.Ninos)

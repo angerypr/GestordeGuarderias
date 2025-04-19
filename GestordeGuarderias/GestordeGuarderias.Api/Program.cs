@@ -29,12 +29,8 @@ builder.Services.AddScoped<INinoRepository, NinoRepository>();
 builder.Services.AddScoped<INinoService, NinoService>();
 builder.Services.AddScoped<ITutorRepository, TutorRepository>();
 builder.Services.AddScoped<ITutorService, TutorService>();
-builder.Services.AddScoped<INinoService, NinoService>();
-builder.Services.AddScoped<INinoRepository, NinoRepository>();
 builder.Services.AddScoped<IPagoRepository, PagoRepository>();
 builder.Services.AddScoped<IPagoService, PagoService>();
-builder.Services.AddScoped<IActividadNinoRepository, ActividadNinoRepository>();
-builder.Services.AddScoped<IActividadNinoService, ActividadNinoService>();
 builder.Services.AddScoped<IAsistenciaRepository, AsistenciaRepository>();
 builder.Services.AddScoped<IAsistenciaService, AsistenciaService>();
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using GestordeGuarderias.Web.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,6 +21,8 @@ namespace GestordeGuarderias.Web.ViewModels
 
         [Required(ErrorMessage = "Debe seleccionar una guardería")]
         public Guid GuarderiaId { get; set; }
+        public NinoViewModel Nino { get; set; } = new NinoViewModel();
+        public GuarderiaViewModel Guarderia { get; set; } = new GuarderiaViewModel();
 
         public List<SelectListItem> Ninos { get; set; } = new List<SelectListItem>();
 

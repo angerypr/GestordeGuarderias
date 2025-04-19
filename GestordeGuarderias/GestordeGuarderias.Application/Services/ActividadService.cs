@@ -17,9 +17,10 @@ namespace GestordeGuarderias.Application.Services
             _actividadRepository = actividadRepository;
         }
 
-        public async Task<IEnumerable<ActividadDTO>> GetAllAsync()
+        public async Task<IEnumerable<ActividadDTO>> GetAllWithGuarderiaAsync()
         {
-            var actividades = await _actividadRepository.GetAllAsync();
+            var actividades = await _actividadRepository.GetAllWithGuarderiaAsync();
+
             return actividades.Select(a => new ActividadDTO
             {
                 Id = a.Id,
@@ -27,13 +28,24 @@ namespace GestordeGuarderias.Application.Services
                 Descripcion = a.Descripcion,
                 Fecha = a.Fecha,
                 Hora = a.Hora,
-                GuarderiaId = a.GuarderiaId
+                GuarderiaId = a.GuarderiaId,
+                Guarderia = a.Guarderia != null
+                    ? new GuarderiaDTO
+                    {
+                        Id = a.Guarderia.Id,
+                        Nombre = a.Guarderia.Nombre
+                    }
+                    : new GuarderiaDTO
+                    {
+                        Id = Guid.Empty,
+                        Nombre = "Guardería no disponible"
+                    }
             }).ToList();
         }
 
         public async Task<ActividadDTO> GetByIdAsync(Guid id)
         {
-            var actividad = await _actividadRepository.GetByIdAsync(id)
+            var actividad = await _actividadRepository.GetByIdWithGuarderiaAsync(id)
                 ?? throw new Exception("Actividad no encontrada");
 
             return new ActividadDTO
@@ -43,8 +55,25 @@ namespace GestordeGuarderias.Application.Services
                 Descripcion = actividad.Descripcion,
                 Fecha = actividad.Fecha,
                 Hora = actividad.Hora,
-                GuarderiaId = actividad.GuarderiaId
+                GuarderiaId = actividad.GuarderiaId,
+                Guarderia = actividad.Guarderia != null
+                    ? new GuarderiaDTO
+                    {
+                        Id = actividad.Guarderia.Id,
+                        Nombre = actividad.Guarderia.Nombre
+                    }
+                    : null
             };
+        }
+
+        public async Task<Actividad?> GetByIdWithGuarderiaAsync(Guid id)
+        {
+            return await _actividadRepository.GetByIdWithGuarderiaAsync(id);
+        }
+
+        public async Task<List<Actividad>> GetActividadesByNombreAsync(string nombre)
+        {
+            return await _actividadRepository.GetActividadesByNombreAsync(nombre);
         }
 
         public async Task<ActividadDTO> CreateAsync(ActividadDTO dto)

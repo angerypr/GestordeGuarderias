@@ -53,21 +53,6 @@ namespace GestordeGuarderias.Infrastructure.Migrations
                     b.ToTable("Actividades");
                 });
 
-            modelBuilder.Entity("GestordeGuarderias.Domain.Entities.ActividadNino", b =>
-                {
-                    b.Property<Guid>("NinoId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ActividadId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("NinoId", "ActividadId");
-
-                    b.HasIndex("ActividadId");
-
-                    b.ToTable("ActividadesNinos");
-                });
-
             modelBuilder.Entity("GestordeGuarderias.Domain.Entities.Asistencia", b =>
                 {
                     b.Property<Guid>("Id")
@@ -238,25 +223,6 @@ namespace GestordeGuarderias.Infrastructure.Migrations
                     b.Navigation("Guarderia");
                 });
 
-            modelBuilder.Entity("GestordeGuarderias.Domain.Entities.ActividadNino", b =>
-                {
-                    b.HasOne("GestordeGuarderias.Domain.Entities.Actividad", "Actividad")
-                        .WithMany("ActividadesNinos")
-                        .HasForeignKey("ActividadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GestordeGuarderias.Domain.Entities.Nino", "Nino")
-                        .WithMany("ActividadesNinos")
-                        .HasForeignKey("NinoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Actividad");
-
-                    b.Navigation("Nino");
-                });
-
             modelBuilder.Entity("GestordeGuarderias.Domain.Entities.Asistencia", b =>
                 {
                     b.HasOne("GestordeGuarderias.Domain.Entities.Guarderia", "Guarderia")
@@ -322,11 +288,6 @@ namespace GestordeGuarderias.Infrastructure.Migrations
                     b.Navigation("Tutor");
                 });
 
-            modelBuilder.Entity("GestordeGuarderias.Domain.Entities.Actividad", b =>
-                {
-                    b.Navigation("ActividadesNinos");
-                });
-
             modelBuilder.Entity("GestordeGuarderias.Domain.Entities.Guarderia", b =>
                 {
                     b.Navigation("Actividades");
@@ -340,8 +301,6 @@ namespace GestordeGuarderias.Infrastructure.Migrations
 
             modelBuilder.Entity("GestordeGuarderias.Domain.Entities.Nino", b =>
                 {
-                    b.Navigation("ActividadesNinos");
-
                     b.Navigation("Asistencias");
 
                     b.Navigation("Pagos");

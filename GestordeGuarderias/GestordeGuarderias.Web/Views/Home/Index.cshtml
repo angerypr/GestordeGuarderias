@@ -1,8 +1,78 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-4">
+    <div class="text-center mb-5">
+        <h2 class="text-primary">Bienvenido a Little Hub</h2>
+        <p class="text-muted">Seleccione una opción para gestionar la información del sistema.</p>
+    </div>
+
+    <div class="row g-4">
+        @* Guarderías *@
+        <div class="col-md-4">
+            <div class="card border-primary shadow rounded-2xl h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-primary">Guarderías</h5>
+                    <p class="card-text text-muted">Administre la información de cada guardería registrada en el sistema.</p>
+                    <a asp-controller="Guarderias" asp-action="Index" class="btn btn-outline-primary">Ir a Guarderías</a>
+                </div>
+            </div>
+        </div>
+
+        @* Tutores *@
+        <div class="col-md-4">
+            <div class="card border-success shadow rounded-2xl h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-success">Tutores</h5>
+                    <p class="card-text text-muted">Registre y gestione la información de los tutores de los niños.</p>
+                    <a asp-controller="Tutores" asp-action="Index" class="btn btn-outline-success">Ir a Tutores</a>
+                </div>
+            </div>
+        </div>
+
+        @* Niños *@
+        <div class="col-md-4">
+            <div class="card border-warning shadow rounded-2xl h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-warning">Niños</h5>
+                    <p class="card-text text-muted">Gestione los datos de los niños inscritos en las guarderías.</p>
+                    <a asp-controller="Ninos" asp-action="Index" class="btn btn-outline-warning">Ir a Niños</a>
+                </div>
+            </div>
+        </div>
+
+        @* Actividades *@
+        <div class="col-md-4">
+            <div class="card border-info shadow rounded-2xl h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-info">Actividades</h5>
+                    <p class="card-text text-muted">Cree y administre actividades para los niños dentro de cada guardería.</p>
+                    <a asp-controller="Actividades" asp-action="Index" class="btn btn-outline-info">Ir a Actividades</a>
+                </div>
+            </div>
+        </div>
+
+        @* Pagos *@
+        <div class="col-md-4">
+            <div class="card border-danger shadow rounded-2xl h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-danger">Pagos</h5>
+                    <p class="card-text text-muted">Registre los pagos realizados por los tutores para cada niño.</p>
+                    <a asp-controller="Pagos" asp-action="Index" class="btn btn-outline-danger">Ir a Pagos</a>
+                </div>
+            </div>
+        </div>
+
+        @* Asistencias *@
+        <div class="col-md-4">
+            <div class="card border-secondary shadow rounded-2xl h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-secondary">Asistencias</h5>
+                    <p class="card-text text-muted">Registre la asistencia diaria de los niños a la guardería.</p>
+                    <a asp-controller="Asistencias" asp-action="Index" class="btn btn-outline-secondary">Ir a Asistencias</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

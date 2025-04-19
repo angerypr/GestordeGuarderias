@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using GestordeGuarderias.Application.DTOs;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace GestordeGuarderias.Web.Models
@@ -25,6 +26,9 @@ namespace GestordeGuarderias.Web.Models
         [Required(ErrorMessage = "Debe seleccionar una guardería")]
         public Guid GuarderiaId { get; set; }
 
+        [Required]
+        public GuarderiaViewModel Guarderia { get; set; } = new GuarderiaViewModel();
+        public IEnumerable<GuarderiaDTO> GuarderiaOptions { get; set; } = new List<GuarderiaDTO>();
         public List<SelectListItem> Guarderias { get; set; } = new();
     }
 }

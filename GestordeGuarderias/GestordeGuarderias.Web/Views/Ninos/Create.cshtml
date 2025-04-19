@@ -1,0 +1,52 @@
+﻿@model GestordeGuarderias.Web.Models.NinoViewModel
+
+<div class="card text-primary">
+    <div class="card-header text-center">
+        <h5>Registrar Nuevo Niño</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form asp-action="Create">
+                    <div class="form-group">
+                        <label asp-for="Nombre"></label>
+                        <input asp-for="Nombre" class="form-control" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Apellido"></label>
+                        <input asp-for="Apellido" class="form-control" />
+                        <span asp-validation-for="Apellido" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="FechaNacimiento"></label>
+                        <input asp-for="FechaNacimiento" type="date" class="form-control" />
+                        <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="TutorId"></label>
+                        <select asp-for="TutorId" asp-items="Model.Tutores" class="form-control" id="tutor-select">
+                            <option value="">Seleccione un tutor</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="GuarderiaId"></label>
+                        <select asp-for="GuarderiaId" asp-items="Model.Guarderias" class="form-control" id="guarderia-select">
+                            <option value="">Seleccione una guardería</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-outline-primary">Guardar</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted text-center">
+        Registrar Niño
+    </div>
+</div>

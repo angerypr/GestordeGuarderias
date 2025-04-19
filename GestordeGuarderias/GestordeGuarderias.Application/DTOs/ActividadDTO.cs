@@ -8,6 +8,7 @@
         public required DateTime Fecha { get; set; }
         public required TimeSpan Hora { get; set; }
         public Guid GuarderiaId { get; set; }
+        public GuarderiaDTO? Guarderia { get; set; }
     }
 
 }

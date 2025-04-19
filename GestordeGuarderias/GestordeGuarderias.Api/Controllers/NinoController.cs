@@ -1,5 +1,6 @@
 ﻿using GestordeGuarderias.Application.DTOs;
 using GestordeGuarderias.Application.Interfaces;
+using GestordeGuarderias.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestordeGuarderias.Api.Controllers
@@ -16,9 +17,9 @@ namespace GestordeGuarderias.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllWithTutorAndGuarderia()
         {
-            var ninos = await _ninoService.GetAllAsync();
+            var ninos = await _ninoService.GetAllWithTutorAndGuarderiaAsync();
             return Ok(ninos);
         }
 
@@ -27,7 +28,7 @@ namespace GestordeGuarderias.Api.Controllers
         {
             try
             {
-                var nino = await _ninoService.GetByIdAsync(id);
+                var nino = await _ninoService.GetByIdWithTutorAndGuarderiaAsync(id);
                 return Ok(nino);
             }
             catch (Exception)
@@ -37,48 +38,43 @@ namespace GestordeGuarderias.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] NinoDTO ninoDto)
+        public async Task<IActionResult> Create([FromBody] NinoDTO dto)
         {
             if (!ModelState.IsValid)
-            {
-                return BadRequest("El modelo es inválido");
-            }
-
-            var nino = await _ninoService.CreateAsync(ninoDto);
-            return Ok(new { success = true, id = nino.Id });
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, [FromBody] NinoDTO ninoDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("El modelo es inválido");
-            }
+                return BadRequest(ModelState);
 
             try
             {
-                await _ninoService.UpdateAsync(id, ninoDto);
-                return Ok(new { success = true });
+                var result = await _ninoService.CreateAsync(dto);
+                return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NotFound(new { success = false, message = "Nino no encontrado" });
+                return BadRequest(new { mensaje = ex.Message });
             }
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, [FromBody] NinoDTO dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var actualizado = await _ninoService.UpdateAsync(id, dto);
+            if (!actualizado)
+                return NotFound();
+
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            try
-            {
-                await _ninoService.DeleteAsync(id);
-                return Ok(new { success = true });
-            }
-            catch (Exception)
-            {
-                return NotFound(new { success = false, message = "Nino no encontrado" });
-            }
+            var eliminado = await _ninoService.DeleteAsync(id);
+            if (!eliminado)
+                return NotFound();
+
+            return NoContent();
         }
 
     }

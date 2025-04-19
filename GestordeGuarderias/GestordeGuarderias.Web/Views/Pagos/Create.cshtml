@@ -1,0 +1,54 @@
+﻿@model GestordeGuarderias.Web.Models.PagoViewModel
+
+<div class="card text-primary">
+    <div class="card-header text-center">
+        <h5>Registrar Nuevo Pago</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form asp-action="Create">
+                    <div class="form-group">
+                        <label asp-for="NinoId"></label>
+                        <select asp-for="NinoId" asp-items="Model.Ninos" class="form-control" id="nino-select">
+                            <option value="">Seleccione un niño</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="TutorId"></label>
+                        <select asp-for="TutorId" asp-items="Model.Tutores" class="form-control" id="tutor-select">
+                            <option value="">Seleccione un tutor</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="GuarderiaId"></label>
+                        <select asp-for="GuarderiaId" asp-items="Model.Guarderias" class="form-control" id="guarderia-select">
+                            <option value="">Seleccione una guardería</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Monto">Monto</label>
+                        <input type="number" asp-for="Monto" class="form-control" step="0.01" />
+                        <span asp-validation-for="Monto" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Fecha">Fecha</label>
+                        <input type="date" class="form-control" id="Fecha" name="Fecha"
+                               value="@Model.Fecha.ToString("yyyy-MM-dd")" required />
+                        <span asp-validation-for="Fecha" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-outline-primary">Guardar</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted text-center">
+        Registrar Pago
+    </div>
+</div>

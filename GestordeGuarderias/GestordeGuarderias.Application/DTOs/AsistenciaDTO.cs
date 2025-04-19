@@ -5,7 +5,9 @@
         public Guid Id { get; set; }
         public required bool Presente { get; set; }
         public required DateTime Fecha { get; set; }
-        public required Guid NinoId { get; set; }
-        public required Guid GuarderiaId { get; set; }
+        public Guid NinoId { get; set; }
+        public NinoDTO? Nino { get; set; }
+        public Guid GuarderiaId { get; set; }
+        public GuarderiaDTO? Guarderia { get; set; }
     }
 }

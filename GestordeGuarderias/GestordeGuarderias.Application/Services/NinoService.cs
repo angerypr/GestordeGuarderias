@@ -2,6 +2,7 @@
 using GestordeGuarderias.Application.Interfaces;
 using GestordeGuarderias.Domain.Entities;
 using GestordeGuarderias.Domain.Interfaces;
+using GestordeGuarderias.Infrastructure.Repositories;
 using Microsoft.Extensions.Logging;
 
 namespace GestordeGuarderias.Application.Services
@@ -41,13 +42,21 @@ namespace GestordeGuarderias.Application.Services
                 Apellido = n.Apellido,
                 FechaNacimiento = n.FechaNacimiento,
                 TutorId = n.TutorId,
+                Tutor = n.Tutor != null
+                    ? new TutorDTO
+                    {
+                        Id = n.Tutor.Id,
+                        Nombre = n.Tutor.Nombre,
+                        Apellido = n.Tutor.Apellido
+                    }
+                    : null,
                 GuarderiaId = n.GuarderiaId
             });
         }
 
-        public async Task<NinoDTO?> GetByIdAsync(Guid id)
+        public async Task<NinoDTO?> GetByIdWithTutorAndGuarderiaAsync(Guid id)
         {
-            var nino = await _ninoRepository.GetByIdAsync(id);
+            var nino = await _ninoRepository.GetByIdWithTutorAndGuarderiaAsync(id);
             if (nino == null) return null;
 
             return new NinoDTO
@@ -57,17 +66,70 @@ namespace GestordeGuarderias.Application.Services
                 Apellido = nino.Apellido,
                 FechaNacimiento = nino.FechaNacimiento,
                 TutorId = nino.TutorId,
-                GuarderiaId = nino.GuarderiaId
+                GuarderiaId = nino.GuarderiaId,
+                Tutor = nino.Tutor != null ? new TutorDTO
+                {
+                    Id = nino.Tutor.Id,
+                    Nombre = nino.Tutor.Nombre,
+                    Apellido = nino.Tutor.Apellido
+                } : null,
+                Guarderia = nino.Guarderia != null ? new GuarderiaDTO
+                {
+                    Id = nino.Guarderia.Id,
+                    Nombre = nino.Guarderia.Nombre
+                } : null
             };
+        }
+
+        public async Task<IEnumerable<NinoDTO>> GetAllWithTutorAndGuarderiaAsync()
+        {
+            var ninos = await _ninoRepository.GetAllWithTutorAndGuarderiaAsync();
+
+            return ninos.Select(n => new NinoDTO
+            {
+                Id = n.Id,
+                Nombre = n.Nombre,
+                Apellido = n.Apellido,
+                FechaNacimiento = n.FechaNacimiento,
+                TutorId = n.TutorId,
+                GuarderiaId = n.GuarderiaId,
+                Tutor = n.Tutor != null ? new TutorDTO
+                {
+                    Id = n.Tutor.Id,
+                    Nombre = n.Tutor.Nombre,
+                    Apellido = n.Tutor.Apellido
+                } : null,
+                Guarderia = n.Guarderia != null ? new GuarderiaDTO
+                {
+                    Id = n.Guarderia.Id,
+                    Nombre = n.Guarderia.Nombre
+                } : null
+            });
+        }
+
+        public async Task<IEnumerable<NinoDTO>> GetNinosByNameAsync(string nombre)
+        {
+            var ninos = await _ninoRepository.GetNinosByNameAsync(nombre);
+
+            return ninos.Select(n => new NinoDTO
+            {
+                Id = n.Id,
+                Nombre = n.Nombre,
+                Apellido = n.Apellido,
+                FechaNacimiento = n.FechaNacimiento,
+                TutorId = n.TutorId,
+                GuarderiaId = n.GuarderiaId
+            });
         }
         public async Task<NinoDTO> CreateAsync(NinoDTO dto)
         {
-            Console.WriteLine($">>> TutorId recibido en el DTO: {dto.TutorId}");
             var tutor = await _tutorRepository.GetByIdAsync(dto.TutorId);
-            var guarderia = await _guarderiaRepository.GetByIdAsync(dto.GuarderiaId);
+            if (tutor == null)
+                throw new Exception("Tutor no encontrado.");
 
-            if (tutor == null || guarderia == null)
-                throw new Exception("Tutor o guardería no encontrados.");
+            var guarderia = await _guarderiaRepository.GetByIdAsync(dto.GuarderiaId);
+            if (guarderia == null)
+                throw new Exception("Guardería no encontrada.");
 
             var nino = new Nino
             {
@@ -75,32 +137,26 @@ namespace GestordeGuarderias.Application.Services
                 Nombre = dto.Nombre,
                 Apellido = dto.Apellido,
                 FechaNacimiento = dto.FechaNacimiento,
-                TutorId = dto.TutorId,
-                GuarderiaId = dto.GuarderiaId
+                TutorId = tutor.Id,
+                GuarderiaId = guarderia.Id,
+                Tutor = tutor,
+                Guarderia = guarderia
             };
 
             await _ninoRepository.AddAsync(nino);
             await _unitOfWork.CompleteAsync();
-            Console.WriteLine($"Correo del tutor: {tutor.CorreoElectronico}");
 
             try
             {
                 var asunto = "Registro en guardería";
-                var cuerpo = $"Hola, {tutor.Nombre} {tutor.Apellido}. " +
-                             $"Su hijo/a {nino.Nombre} {nino.Apellido} ha sido registrado en la guardería {guarderia.Nombre}.";
-
-                Console.WriteLine(">> Enviando correo...");
-                Console.WriteLine($">> Para: {tutor.CorreoElectronico}");
-                Console.WriteLine($">> Asunto: {asunto}");
-                Console.WriteLine($">> Cuerpo: {cuerpo}");
+                var cuerpo = $@"Hola {tutor.Nombre} {tutor.Apellido}, 
+Su hijo/a {nino.Nombre} {nino.Apellido} ha sido registrado en la guardería {guarderia.Nombre}.";
 
                 await _servicioEmail.EnviarEmail(tutor.CorreoElectronico, asunto, cuerpo);
-                Console.WriteLine(">> Correo enviado.");
             }
             catch (Exception ex)
             {
-                _logger?.LogError(ex, "Error al enviar el correo electrónico de registro.");
-                Console.WriteLine($"ERROR EMAIL: {ex.Message}");
+                _logger?.LogError(ex, "Error al enviar el correo electrónico de registro del niño.");
             }
 
             return new NinoDTO
@@ -109,8 +165,20 @@ namespace GestordeGuarderias.Application.Services
                 Nombre = nino.Nombre,
                 Apellido = nino.Apellido,
                 FechaNacimiento = nino.FechaNacimiento,
-                TutorId = nino.TutorId,
-                GuarderiaId = nino.GuarderiaId
+                TutorId = tutor.Id,
+                GuarderiaId = guarderia.Id,
+                Tutor = new TutorDTO
+                {
+                    Id = tutor.Id,
+                    Nombre = tutor.Nombre,
+                    Apellido = tutor.Apellido,
+                    CorreoElectronico = tutor.CorreoElectronico
+                },
+                Guarderia = new GuarderiaDTO
+                {
+                    Id = guarderia.Id,
+                    Nombre = guarderia.Nombre
+                }
             };
         }
 

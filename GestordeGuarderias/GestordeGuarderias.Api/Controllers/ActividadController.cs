@@ -22,7 +22,7 @@ namespace GestordeGuarderias.API.Controllers
         {
             try
             {
-                var actividades = await _actividadService.GetAllAsync();
+                var actividades = await _actividadService.GetAllWithGuarderiaAsync();
                 return Ok(actividades);  
             }
             catch (Exception ex)

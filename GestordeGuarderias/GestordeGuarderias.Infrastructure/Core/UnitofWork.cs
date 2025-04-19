@@ -12,7 +12,6 @@ public class UnitOfWork : IUnitOfWork
     public INinoRepository NinoRepository { get; }
     public IActividadRepository ActividadRepository { get; }
     public IPagoRepository PagoRepository { get; }
-    public IActividadNinoRepository ActividadNinoRepository { get; }
     public IAsistenciaRepository AsistenciaRepository { get; }
 
     public UnitOfWork(
@@ -22,7 +21,6 @@ public class UnitOfWork : IUnitOfWork
         INinoRepository ninos,
         IActividadRepository actividades,
         IPagoRepository pagos,
-        IActividadNinoRepository actividadesninos,
         IAsistenciaRepository asistencias)
     {
         _context = context;
@@ -31,7 +29,6 @@ public class UnitOfWork : IUnitOfWork
         NinoRepository = ninos;
         ActividadRepository = actividades;
         PagoRepository = pagos;
-        ActividadNinoRepository = actividadesninos;
         AsistenciaRepository = asistencias;
     }
 

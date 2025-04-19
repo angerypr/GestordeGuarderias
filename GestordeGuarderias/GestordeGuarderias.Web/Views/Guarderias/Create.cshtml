@@ -1,0 +1,38 @@
+﻿@model GestordeGuarderias.Web.Models.GuarderiaViewModel
+
+<div class="card text-primary">
+    <div class="card-header text-center">
+        <h5>Crear Nueva Guardería</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form asp-action="Create">
+                    <div class="form-group">
+                        <label for="Nombre">Nombre</label>
+                        <input type="text" class="form-control" id="Nombre" name="Nombre"
+                               value="@Model.Nombre" required maxlength="200" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="Direccion">Dirección</label>
+                        <input type="text" class="form-control" id="Direccion" name="Direccion"
+                               value="@Model.Direccion" required maxlength="300" />
+                        <span asp-validation-for="Direccion" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="Telefono">Teléfono</label>
+                        <input type="text" class="form-control" id="Telefono" name="Telefono"
+                               value="@Model.Telefono" required />
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary">Guardar</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted text-center">
+        Crear Guardería
+    </div>
+</div>

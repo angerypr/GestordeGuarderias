@@ -1,0 +1,30 @@
+﻿@model GestordeGuarderias.Web.Models.TutorViewModel
+
+<div class="card text-primary">
+    <div class="card-header text-center">
+        <h5>Eliminar Tutor</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a asp-action="Index" class="btn btn-outline-primary btn-sm">Volver a la lista</a>
+                        <hr />
+                        <h5 class="panel-title">Confirmar Eliminación</h5>
+                    </div>
+                    <div class="panel-body">
+                        <form asp-action="Delete" method="post">
+                            <input type="hidden" asp-for="Id" />
+                            <p>¿Estás seguro de que deseas eliminar al tutor @Model.Nombre @Model.Apellido?</p>
+                            <button type="submit" class="btn btn-outline-danger">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted text-center">
+        Crud Tutores
+    </div>
+</div>

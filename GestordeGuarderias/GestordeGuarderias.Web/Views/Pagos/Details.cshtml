@@ -1,0 +1,45 @@
+﻿@model GestordeGuarderias.Web.Models.PagoViewModel
+
+<div class="card text-primary">
+    <div class="card-header text-center">
+        <h5>Detalles del Pago</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a asp-action="Index" class="btn btn-outline-primary btn-sm">Volver a la lista</a>
+                        <hr />
+                        <h5 class="panel-title">Información del Pago</h5>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="control-label">Fecha</label>
+                            <p class="form-control-static">@Model.Fecha.ToString("dd/MM/yyyy")</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Monto</label>
+                            <p class="form-control-static">$@Model.Monto.ToString("F2")</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Niño</label>
+                            <p class="form-control-static">@Model.Nino?.Nombre @Model.Nino?.Apellido</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Guardería</label>
+                            <p class="form-control-static">@Model.Guarderia?.Nombre</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Tutor</label>
+                            <p class="form-control-static">@Model.Tutor?.Nombre @Model.Tutor?.Apellido</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted text-center">
+        Crud Pagos
+    </div>
+</div>

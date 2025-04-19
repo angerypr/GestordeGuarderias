@@ -1,0 +1,34 @@
+﻿@model GestordeGuarderias.Web.ViewModels.AsistenciaViewModel
+
+<div class="card text-primary">
+    <div class="card-header text-center">
+        <h5>Editar Asistencia</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form asp-action="Edit" method="post">
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="form-group">
+                        <label asp-for="Fecha">Fecha</label>
+                        <input type="date" asp-for="Fecha" class="form-control" />
+                        <span asp-validation-for="Fecha" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-check">
+                        <input type="checkbox" asp-for="Presente" class="form-check-input" />
+                        <label class="form-check-label" asp-for="Presente">¿Presente?</label>
+                        <span asp-validation-for="Presente" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-outline-warning">Actualizar</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted text-center">
+        Editar Asistencia
+    </div>
+</div>

@@ -9,8 +9,6 @@
         public required TimeSpan Hora { get; set; }
         public Guid GuarderiaId { get; set; }
         public Guarderia? Guarderia { get; set; }
-        public ICollection<ActividadNino> ActividadesNinos { get; set; } = new List<ActividadNino>();
-
     }
 
 }

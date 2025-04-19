@@ -41,6 +41,7 @@ namespace GestordeGuarderias.Api.Controllers
             try
             {
                 var nuevoPago = await _pagoService.CreateAsync(dto);
+
                 return CreatedAtAction(nameof(GetById), new { id = nuevoPago.Id }, nuevoPago);
             }
             catch (Exception ex)

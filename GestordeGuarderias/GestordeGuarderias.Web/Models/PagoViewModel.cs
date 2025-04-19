@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using GestordeGuarderias.Web.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace GestordeGuarderias.Web.ViewModels
+namespace GestordeGuarderias.Web.Models
 {
     public class PagoViewModel
     {
@@ -24,6 +25,9 @@ namespace GestordeGuarderias.Web.ViewModels
 
         [Required(ErrorMessage = "Debe seleccionar un tutor")]
         public Guid TutorId { get; set; }
+        public NinoViewModel Nino { get; set; } = new NinoViewModel();
+        public GuarderiaViewModel Guarderia { get; set; } = new GuarderiaViewModel();
+        public TutorViewModel Tutor { get; set; } = new TutorViewModel();
 
         public List<SelectListItem> Ninos { get; set; } = new List<SelectListItem>();
         public List<SelectListItem> Guarderias { get; set; } = new List<SelectListItem>();

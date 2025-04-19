@@ -1,0 +1,31 @@
+﻿@model ActividadViewModel
+
+<div class="card text-primary">
+    <div class="card-header text-center">
+        <h5>Eliminar Actividad</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a asp-action="Index" class="btn btn-outline-primary btn-sm">Volver a la lista</a>
+                        <hr />
+                        <h5 class="panel-title">Confirmar Eliminación</h5>
+                    </div>
+                    <div class="panel-body">
+                        <form asp-action="Delete" method="post">
+                            <input type="hidden" asp-for="Id" />
+                            <p>¿Estás seguro de que deseas eliminar la actividad <strong>@Model.Nombre</strong> programada para el día <strong>@Model.Fecha.ToString("dd/MM/yyyy")</strong>?</p>
+                            <button type="submit" class="btn btn-outline-danger">Eliminar</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary ms-2">Cancelar</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted text-center">
+        Crud Actividades
+    </div>
+</div>

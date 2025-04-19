@@ -29,5 +29,7 @@ namespace GestordeGuarderias.Web.Models
 
         public List<SelectListItem> Tutores { get; set; } = new();
         public List<SelectListItem> Guarderias { get; set; } = new();
+        public GuarderiaViewModel Guarderia { get; set; } = new GuarderiaViewModel();
+        public TutorViewModel Tutor { get; set; } = new TutorViewModel();
     }
 }

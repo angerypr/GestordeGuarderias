@@ -1,0 +1,45 @@
+﻿@model GestordeGuarderias.Web.Models.TutorViewModel
+
+<div class="card text-primary">
+    <div class="card-header text-center">
+        <h5>Detalles del Tutor</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a asp-action="Index" class="btn btn-outline-primary btn-sm">Volver a la lista</a>
+                        <hr />
+                        <h5 class="panel-title">Información del Tutor</h5>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="control-label">Nombre</label>
+                            <p class="form-control-static">@Model.Nombre</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Apellido</label>
+                            <p class="form-control-static">@Model.Apellido</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Teléfono</label>
+                            <p class="form-control-static">@Model.Telefono</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Cédula</label>
+                            <p class="form-control-static">@Model.Cedula</p>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Correo electrónico</label>
+                            <p class="form-control-static">@Model.CorreoElectronico</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted text-center">
+        Crud Tutores
+    </div>
+</div>

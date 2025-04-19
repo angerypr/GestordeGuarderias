@@ -11,7 +11,6 @@ namespace GestordeGuarderias.Application.Interfaces
         INinoRepository NinoRepository { get; }
         IActividadRepository ActividadRepository { get; }
         IPagoRepository PagoRepository { get; }
-        IActividadNinoRepository ActividadNinoRepository { get; }
         IAsistenciaRepository AsistenciaRepository { get; }
 
         Task<int> SaveAsync();

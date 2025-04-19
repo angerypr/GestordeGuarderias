@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ActividadViewModel>
+
+<div class="card text-primary">
+    <div class="card-header text-center">
+        <h5>Lista de Actividades</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a asp-action="Create" class="btn btn-outline-primary btn-sm">Añadir actividad</a>
+                        <hr />
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-hover table-responsive table-striped" id="MyTable">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Descripción</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Guardería</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                                        <td>@item.Fecha.ToString("dd/MM/yyyy")</td>
+                                        <td>@item.Hora.ToString(@"hh\:mm")</td>
+                                        <td>@item.Guarderia?.Nombre</td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning btn-sm">Editar</a>
+                                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm">Detalles</a>
+                                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted text-center">
+        CRUD de actividades
+    </div>
+</div>

@@ -17,6 +17,17 @@ namespace GestordeGuarderias.Infrastructure.Repositories
                 .Where(a => a.Nombre.Contains(nombre))
                 .ToListAsync();
         }
-
+        public async Task<IEnumerable<Actividad>> GetAllWithGuarderiaAsync()
+        {
+            return await _dbSet
+                .Include(a => a.Guarderia)
+                .ToListAsync();
+        }
+        public async Task<Actividad?> GetByIdWithGuarderiaAsync(Guid id)
+        {
+            return await _dbSet
+                .Include(a => a.Guarderia)
+                .FirstOrDefaultAsync(a => a.Id == id);
+        }
     }
 }

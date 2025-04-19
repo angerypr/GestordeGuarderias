@@ -1,0 +1,40 @@
+﻿@model GestordeGuarderias.Web.ViewModels.AsistenciaViewModel
+
+<div class="card text-primary">
+    <div class="card-header text-center">
+        <h5>Registrar Nueva Asistencia</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <form asp-action="Create">
+                    <div class="form-group">
+                        <label for="NinoId">Niño</label>
+                        <select asp-for="NinoId" class="form-control" asp-items="Model.Ninos">
+                            <option value="">Seleccione un niño</option>
+                        </select>
+                        <span asp-validation-for="NinoId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Fecha">Fecha</label>
+                        <input type="date" class="form-control" id="Fecha" name="Fecha"
+                               value="@Model.Fecha.ToString("yyyy-MM-dd")" required />
+                        <span asp-validation-for="Fecha" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" asp-for="Presente" />
+                        <label class="form-check-label" asp-for="Presente">¿Presente?</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-outline-primary">Guardar</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted text-center">
+        Registrar Asistencia
+    </div>
+</div>

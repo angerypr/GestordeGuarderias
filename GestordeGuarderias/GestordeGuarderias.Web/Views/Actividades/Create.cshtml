@@ -1,0 +1,66 @@
+﻿@model GestordeGuarderias.Web.Models.ActividadViewModel
+
+<div class="card text-primary">
+    <div class="card-header text-center">
+        <h5>Registrar Nueva Actividad</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a asp-action="Index" class="btn btn-outline-primary btn-sm">Volver a la lista</a>
+                        <hr />
+                        <h5 class="panel-title">Datos de la Actividad</h5>
+                    </div>
+                    <div class="panel-body">
+                        <form asp-action="Create" method="post">
+                            <div class="form-group">
+                                <label asp-for="Nombre" class="control-label"></label>
+                                <input asp-for="Nombre" class="form-control" />
+                                <span asp-validation-for="Nombre" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Descripcion" class="control-label"></label>
+                                <textarea asp-for="Descripcion" class="form-control"></textarea>
+                                <span asp-validation-for="Descripcion" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Fecha" class="control-label"></label>
+                                <input asp-for="Fecha" class="form-control" type="date" />
+                                <span asp-validation-for="Fecha" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Hora" class="control-label"></label>
+                                <input asp-for="Hora" class="form-control" type="time" />
+                                <span asp-validation-for="Hora" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="GuarderiaId" class="control-label">Guardería</label>
+                                <select asp-for="GuarderiaId" class="form-control" asp-items="Model.Guarderias">
+                                    <option value="">Seleccione una guardería</option>
+                                </select>
+                                <span asp-validation-for="GuarderiaId" class="text-danger"></span>
+                            </div>
+
+                            <button type="submit" class="btn btn-outline-success">Crear Actividad</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted text-center">
+        Crud Actividades
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
